@@ -1,10 +1,12 @@
 import ms3
+import csv
+import torch
 
-folder_path = "beethoven_piano_sonatas/"
+table:list[str] = []
+with open('beethoven_piano_sonatas\chords\\01-1.chords.tsv', newline='') as csvfile:
+    spamreader = csv.reader(csvfile, delimiter='\t')
+    for row in spamreader:
+        table.append(row)
 
-harmonies = ms3.load_tsv(folder_path + 'harmonies/01-1.harmonies.tsv')
-notes = ms3.load_tsv(folder_path + 'notes/01-1.notes.tsv')
-chords = ms3.load_tsv(folder_path + 'chords/01-1.chords.tsv')
-measures = ms3.load_tsv(folder_path + 'measures/01-1.measures.tsv')
+output_file = 'tab_str.tsv'
 
-print(notes)
