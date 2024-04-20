@@ -1,7 +1,5 @@
-import torch
 from Dataset import *
+from Neurolink import *
 
 table = getData(PATH)
-transpose_table = sortTable(table, PATH)
-print(transpose_table[0])
-
+tensor_chords = dataToTensor(table)
