@@ -1,5 +1,3 @@
-PATH = 'beethoven_piano_sonatas\chords\\01-1.chords.tsv'
-
 class Cfg_Chords ():
     mc:list[str] = []	
     mn:list[str] = []	
