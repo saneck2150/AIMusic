@@ -1,6 +1,6 @@
 from Dataset import *
 from Neurolink import *
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfTransformer
 
 # input parameters +
 PATH = 'beethoven_piano_sonatas\measures\\01-1.measures.tsv'
@@ -9,9 +9,9 @@ table_measures = getData(PATH) #list[list[str]]
 for row in table_measures:
     print(row)
 
-########## table vectorisation + 
+########## table vectorisation +            ### Проблема может быть тут, гдето не так векторизирую данные
 table_text = [' '.join(row) for row in table_measures] #to list[str]
-vectorizer = CountVectorizer()
+vectorizer = TfidfTransformer()
 vectorised_table = vectorizer.fit_transform(table_text)
 dense_matrix = vectorised_table.toarray()
 print(vectorised_table)
