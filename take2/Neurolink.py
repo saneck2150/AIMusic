@@ -12,7 +12,7 @@ class Generator(nn.Module):
         super(Generator, self).__init__()
         self.model = nn.Sequential(
             nn.Linear(input_size, 128),
-            nn.ReLU(),
+            nn.ELU(),
             nn.Linear(128, output_size),
             nn.Sigmoid()  # Для генерации вероятностей
         )
@@ -25,7 +25,7 @@ class Discriminator(nn.Module):
         super(Discriminator, self).__init__()
         self.model = nn.Sequential(
             nn.Linear(input_size, 128),
-            nn.ReLU(),
+            nn.ELU(),
             nn.Linear(128, 1),
             nn.Sigmoid()  # Для определения, насколько входные данные реальны
         )

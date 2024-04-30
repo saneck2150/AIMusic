@@ -22,10 +22,10 @@ generator = Generator(input_size, output_size)
 discriminator = Discriminator(input_size)
 
 # Оптимизаторы
-generator_optimizer = torch.optim.Adam(generator.parameters(), lr=0.0002)
+generator_optimizer = torch.optim.Adam(generator.parameters(), lr=0.002)
 discriminator_optimizer = torch.optim.Adam(discriminator.parameters(), lr=0.0002)
 
-num_epochs = 100
+num_epochs = 200
 batch_size = 64
 data_loader = DataLoader(TensorDataset(tensor_df), batch_size=batch_size, shuffle=True)
 
