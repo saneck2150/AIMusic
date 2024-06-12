@@ -48,3 +48,8 @@ original_list_of_lists = decodeList(rounded_generated_seq, unique_values_dict)
 print ("end")
 for raw in original_list_of_lists:
     print(raw)
+
+#OUTPUT
+with open("output1.tsv", 'w', newline='') as file:
+    writer = csv.writer(file, delimiter='\t')
+    writer.writerows(original_list_of_lists)
