@@ -13,15 +13,15 @@ numbered_list, unique_values_dict = encodeList(list_of_lists, df)
 data = torch.tensor(numbered_list, dtype=torch.float32)
 
 input_size = len(numbered_list[0]) 
-hidden_size = 50
+hidden_size = 130
 output_size = input_size
 
 model = LSTMModel(input_size, hidden_size, output_size)
 criterion = nn.MSELoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=0.0001, weight_decay=1e-5)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=1e-5)
 
 #MODEL STUDYNG
-num_epochs = 10000
+num_epochs = 25000
 x_axis = []
 y_axis = []
 
@@ -39,6 +39,7 @@ for epoch in range(num_epochs):
 
 plt.plot(x_axis, y_axis)
 plt.show()
+
 #NEW DATA GENERATOR
 model.eval()
 with torch.no_grad():
@@ -49,18 +50,24 @@ rounded_generated_seq = [[int(round(value)) for value in row] for row in generat
 
 #OUTPUT DATA PRPARATION       
 original_list_of_lists = decodeList(rounded_generated_seq, unique_values_dict)
-print ("end")
-for raw in original_list_of_lists:
-    print(raw)
+# print ("end")
+# for raw in original_list_of_lists:
+#     print(raw)
 
+trans_original_list_of_lists = list(map(list, zip(*original_list_of_lists)))
+trans_numbered_list = list(map(list, zip(*numbered_list)))
+trans_numbered_list[0].pop(0)
+trans_numbered_list[0].append(0)
 real_seq = data.numpy()
-nll_loss, kl_div, diversity = calculate_metrics(generated_seq, real_seq)
+nll_real = list(map(list, zip(*real_seq)))
+
+nll_loss, kl_div, diversity = calculate_metrics(trans_original_list_of_lists[0], trans_numbered_list[0])
 
 print(f'NLL Loss: {nll_loss:.4f}')
 print(f'KL Divergence: {kl_div:.4f}')
 print(f'Diversity: {diversity:.4f}')
 
-#OUTPUT
-with open("output1.tsv", 'w', newline='') as file:
-    writer = csv.writer(file, delimiter='\t')
-    writer.writerows(original_list_of_lists)
+# #OUTPUT
+# with open("output1.tsv", 'w', newline='') as file:
+#     writer = csv.writer(file, delimiter='\t')
+#     writer.writerows(original_list_of_lists)
