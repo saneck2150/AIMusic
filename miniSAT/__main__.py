@@ -1,1 +1,0 @@
-from pysat.solvers import MinisatSolver
