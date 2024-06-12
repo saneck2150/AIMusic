@@ -22,7 +22,7 @@ criterion = nn.MSELoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=1e-5)
 
 #MODEL STUDYNG
-num_epochs = 250
+num_epochs = 25000
 for epoch in range(num_epochs):
     model.train()
     optimizer.zero_grad()
