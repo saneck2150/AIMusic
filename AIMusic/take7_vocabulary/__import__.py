@@ -6,3 +6,6 @@ from torch.utils.data import Dataset, DataLoader
 import numpy as np
 import math
 import csv
+import torch.nn.functional as F
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
