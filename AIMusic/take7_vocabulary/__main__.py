@@ -13,7 +13,7 @@ numbered_list, unique_values_dict = encodeList(list_of_lists, df)
 data = torch.tensor(numbered_list, dtype=torch.float32)
 
 input_size = len(numbered_list[0]) 
-hidden_size = 130
+hidden_size = 150
 output_size = input_size
 
 model = LSTMModel(input_size, hidden_size, output_size)
@@ -61,13 +61,13 @@ trans_numbered_list[0].append(0)
 real_seq = data.numpy()
 nll_real = list(map(list, zip(*real_seq)))
 
-nll_loss, kl_div, diversity = calculate_metrics(trans_original_list_of_lists[0], trans_numbered_list[0])
+nll_loss, kl_div, diversity = calculate_metrics(trans_original_list_of_lists, trans_numbered_list)
 
 print(f'NLL Loss: {nll_loss:.4f}')
 print(f'KL Divergence: {kl_div:.4f}')
 print(f'Diversity: {diversity:.4f}')
 
-# #OUTPUT
-# with open("output1.tsv", 'w', newline='') as file:
-#     writer = csv.writer(file, delimiter='\t')
-#     writer.writerows(original_list_of_lists)
+#OUTPUT
+with open("output1.tsv", 'w', newline='') as file:
+    writer = csv.writer(file, delimiter='\t')
+    writer.writerows(original_list_of_lists)
